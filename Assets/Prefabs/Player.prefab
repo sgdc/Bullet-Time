@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 114165483053219166}
   - component: {fileID: 23694090189859204}
   - component: {fileID: 33035394216858758}
+  - component: {fileID: 114144834704700126}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -59,7 +60,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1789369140855230}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 4.344123, y: 0.38796377, z: 2.8557277}
+  m_LocalPosition: {x: 3.1461658, y: -0.876307, z: 5.405732}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4317141348488872}
@@ -176,6 +177,25 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614489728591200}
   m_Enabled: 1
+--- !u!114 &114144834704700126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1789369140855230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 4317141348488872}
+  m_ChildIndex: 0
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_MovementThreshold: 0.001
+  m_InterpolateRotation: 0.5
+  m_InterpolateMovement: 0.5
 --- !u!114 &114165483053219166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,7 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f7037be1e38904fab8652773fba821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cam: {fileID: 1614489728591200}
+  Cam: {fileID: 4317141348488872}
+  Bullet: {fileID: 1360531393755010, guid: 883cb58dae5a7a74db58adc11168491d, type: 2}
 --- !u!114 &114339911715367748
 MonoBehaviour:
   m_ObjectHideFlags: 1
