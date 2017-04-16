@@ -9,11 +9,14 @@ public class Player : NetworkBehaviour
     public GameObject Bullet;
     public int Health=10;
 
+    InputProviderBase inputProvider;
+
     void Start()
     {
+        inputProvider = GetComponent<InputProviderBase>();
         if (!isLocalPlayer)
         {
-            Destroy(GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>());
+            Destroy(GetComponent<RigidbodyFirstPersonController>());
             Destroy(Cam.GetComponent<AudioListener>());
             Destroy(Cam.GetComponent<FlareLayer>());
             Destroy(Cam.GetComponent<Camera>());
@@ -21,7 +24,7 @@ public class Player : NetworkBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.other.tag=="Bullet")
+        if (collision.transform.tag=="Bullet")
         {
             Health--;
         }
@@ -30,7 +33,7 @@ public class Player : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (inputProvider.Controls.Shoot)
             {
                 shoot();
             }

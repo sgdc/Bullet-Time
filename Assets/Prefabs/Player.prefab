@@ -55,15 +55,16 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4290719111773278}
+  - component: {fileID: 33035394216858758}
+  - component: {fileID: 23694090189859204}
   - component: {fileID: 54696774865135596}
   - component: {fileID: 136714844438452008}
-  - component: {fileID: 114339911715367748}
-  - component: {fileID: 114246090854607270}
   - component: {fileID: 114839659885526252}
   - component: {fileID: 114165483053219166}
-  - component: {fileID: 23694090189859204}
-  - component: {fileID: 33035394216858758}
   - component: {fileID: 114144834704700126}
+  - component: {fileID: 114749020279275764}
+  - component: {fileID: 114339911715367748}
+  - component: {fileID: 114246090854607270}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -373,6 +374,17 @@ MonoBehaviour:
     slowDownRate: 20
     airControl: 0
     shellOffset: 0
+--- !u!114 &114749020279275764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1789369140855230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23e0b54d63e56045af4bbf5a2d146e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114839659885526252
 MonoBehaviour:
   m_ObjectHideFlags: 1
