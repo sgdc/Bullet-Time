@@ -11,9 +11,12 @@ public class Player : NetworkBehaviour
 
     void Start()
     {
-        if (isLocalPlayer)
+        if (!isLocalPlayer)
         {
-            Cam.gameObject.SetActive(true);
+            Destroy(GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>());
+            Destroy(Cam.GetComponent<AudioListener>());
+            Destroy(Cam.GetComponent<FlareLayer>());
+            Destroy(Cam.GetComponent<Camera>());
         }
     }
     private void OnCollisionEnter(Collision collision)
