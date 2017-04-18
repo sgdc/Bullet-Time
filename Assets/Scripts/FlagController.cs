@@ -4,18 +4,38 @@ using UnityEngine;
 
 public class FlagController : MonoBehaviour {
 
+	[SerializeField]
+	private GameObject returnLocation;
+
 	private bool isHeld;
+	private float returnTimer;
+
+	private const float RETURN_TIME = 10f;
 
 	// Use this for initialization
 	void Start ()
 	{
 		isHeld = false;
+		returnTimer = 0f;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		
+		if(returnTimer >= RETURN_TIME)
+		{
+			ReturnFlag();
+			returnTimer = 0f;
+		}
+
+		if(isHeld)
+		{
+			returnTimer = 0;
+		}
+		else if(transform.parent != returnLocation.transform)
+		{
+			returnTimer += Time.deltaTime;
+		}
 	}
 
 	/// <summary>
@@ -32,5 +52,11 @@ public class FlagController : MonoBehaviour {
 	{
 		transform.SetParent(null);
 		isHeld = false;
+	}
+
+	private void ReturnFlag()
+	{
+		transform.SetParent(returnLocation.transform);
+		transform.localPosition= new Vector3(0f, -0.25f, 0f);
 	}
 }
