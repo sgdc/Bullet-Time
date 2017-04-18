@@ -80,7 +80,7 @@ public class RigidbodyFirstPersonController : MonoBehaviour
     public MouseLook mouseLook = new MouseLook();
     public AdvancedSettings advancedSettings = new AdvancedSettings();
 
-
+    private Transform m_CamTransform;
     private Rigidbody m_RigidBody;
     private CapsuleCollider m_Capsule;
     private InputProviderBase inputProvider;
@@ -119,10 +119,11 @@ public class RigidbodyFirstPersonController : MonoBehaviour
 
     private void Start()
     {
+        m_CamTransform = cam.transform;
         m_RigidBody = GetComponent<Rigidbody>();
         m_Capsule = GetComponent<CapsuleCollider>();
         inputProvider = GetComponent<InputProviderBase>();
-        mouseLook.Init(transform, cam.transform);
+        mouseLook.Init(transform, m_CamTransform);
     }
 
 
@@ -145,7 +146,7 @@ public class RigidbodyFirstPersonController : MonoBehaviour
         if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
         {
             // always move along the camera forward as it is the direction that it being aimed at
-            Vector3 desiredMove = cam.transform.forward * input.y + cam.transform.right * input.x;
+            Vector3 desiredMove = m_CamTransform.forward * input.y + m_CamTransform.right * input.x;
             desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
 
             desiredMove.x = desiredMove.x * movementSettings.CurrentTargetSpeed;
@@ -230,7 +231,7 @@ public class RigidbodyFirstPersonController : MonoBehaviour
         // get the rotation before it's changed
         float oldYRotation = transform.eulerAngles.y;
 
-        mouseLook.LookRotation(transform, cam.transform);
+        mouseLook.LookRotation(transform, m_CamTransform);
 
         if (m_IsGrounded || advancedSettings.airControl)
         {

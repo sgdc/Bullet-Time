@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LiveInputProvider : InputProviderBase
 {
-    private ControlsFrame _controls;
+    private ControlsFrame _controls = new ControlsFrame();
     public override ControlsFrame Controls
     {
         get

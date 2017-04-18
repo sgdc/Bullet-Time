@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33493579523834146}
   - component: {fileID: 65501158714403140}
   - component: {fileID: 23633193707908890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 20988920270402392}
   - component: {fileID: 81568374160482418}
   - component: {fileID: 124195527625319842}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 114749020279275764}
   - component: {fileID: 114339911715367748}
   - component: {fileID: 114246090854607270}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1789369140855230}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 3.1461658, y: -0.876307, z: 5.405732}
+  m_LocalPosition: {x: -3.1630263, y: 2.4762197, z: 8.895316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4317141348488872}
@@ -312,9 +312,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f7037be1e38904fab8652773fba821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 1789369140855230}
   Cam: {fileID: 4317141348488872}
   Bullet: {fileID: 1360531393755010, guid: 883cb58dae5a7a74db58adc11168491d, type: 2}
   Health: 10
+  FakeLocalPlayer: 0
 --- !u!114 &114339911715367748
 MonoBehaviour:
   m_ObjectHideFlags: 1
