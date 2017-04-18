@@ -22,6 +22,11 @@ public class FlagController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		if(Input.GetKeyDown(KeyCode.P))
+		{
+			DropFlag();
+		}
+
 		if(returnTimer >= RETURN_TIME)
 		{
 			ReturnFlag();
@@ -45,6 +50,7 @@ public class FlagController : MonoBehaviour {
 	public void GrabFlag(GameObject holder)
 	{
 		transform.SetParent(holder.transform);
+		transform.localPosition = new Vector3(0f, -0.5f, -0.3f);
 		isHeld = true;
 	}
 
