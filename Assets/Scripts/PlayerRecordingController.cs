@@ -25,7 +25,8 @@ public class PlayerRecordingController : MonoBehaviour
             Input.GetButtonDown("Fire1"),
             Input.GetButtonDown("Jump"),
             Input.GetButton("Crouch"),
-            Input.GetButton("Run"));
+            Input.GetButton("Run"),
+            Input.GetKeyDown(KeyCode.P));
         Recording.Add(frame);
 
         if (Input.GetKeyUp(KeyCode.R))

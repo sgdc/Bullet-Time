@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 20765311196442190}
   - component: {fileID: 81307196720944214}
   - component: {fileID: 124905272698103490}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -38,9 +38,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4667700650662496}
   - component: {fileID: 33159954519034714}
-  - component: {fileID: 65201085729142480}
   - component: {fileID: 23296795796720528}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +64,7 @@ GameObject:
   - component: {fileID: 114683009477710632}
   - component: {fileID: 114958942084770100}
   - component: {fileID: 114745485433045816}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Shadow
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -93,7 +92,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1976925970028924}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -0.35635376, y: -0.006608963, z: 5.1320934}
+  m_LocalPosition: {x: 3.0272737, y: -1.2466381, z: 2.6406803}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4266562289934106}
@@ -242,18 +241,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65201085729142480
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1863659493727270}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &81307196720944214
 AudioListener:
   m_ObjectHideFlags: 1
@@ -417,8 +404,8 @@ MonoBehaviour:
   Cam: {fileID: 4266562289934106}
   Bullet: {fileID: 1360531393755010, guid: 883cb58dae5a7a74db58adc11168491d, type: 2}
   Health: 10
-  Shadow: 1
-  FakeLocalPlayer: 0
+  FakeLocalPlayer: 1
+  Flag: {fileID: 0}
 --- !u!124 &124905272698103490
 Behaviour:
   m_ObjectHideFlags: 1

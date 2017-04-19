@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class FlagController : MonoBehaviour {
+public class FlagController : NetworkBehaviour {
 
 	[SerializeField]
 	private GameObject returnLocation;
@@ -22,25 +23,23 @@ public class FlagController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if(Input.GetKeyDown(KeyCode.P))
-		{
-			DropFlag();
-		}
+        if (isServer)
+        {
+            if (returnTimer >= RETURN_TIME)
+            {
+                ReturnFlag();
+                returnTimer = 0f;
+            }
 
-		if(returnTimer >= RETURN_TIME)
-		{
-			ReturnFlag();
-			returnTimer = 0f;
-		}
-
-		if(isHeld)
-		{
-			returnTimer = 0;
-		}
-		else if(transform.parent != returnLocation.transform)
-		{
-			returnTimer += Time.deltaTime;
-		}
+            if (isHeld)
+            {
+                returnTimer = 0;
+            }
+            else if (transform.parent != returnLocation.transform)
+            {
+                returnTimer += Time.deltaTime;
+            }
+        }
 	}
 
 	/// <summary>
@@ -65,4 +64,16 @@ public class FlagController : MonoBehaviour {
 		transform.SetParent(returnLocation.transform);
 		transform.localPosition= new Vector3(0f, -0.25f, 0f);
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (isServer)
+        {
+            if (other.tag.Contains("Player"))
+            {
+                GrabFlag(other.gameObject);
+                other.GetComponent<Player>().Flag = this;
+            }
+        }
+    }
 }

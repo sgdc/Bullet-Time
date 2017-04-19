@@ -10,6 +10,7 @@ public class Player : NetworkBehaviour
     public int Health = 10;
     public List<ControlsFrame>[] Recordings;
     public bool FakeLocalPlayer = false;//I don't love this but we don't have many days left
+    public FlagController Flag;
 
     Transform trans;
     InputProviderBase inputProvider;
@@ -33,17 +34,23 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            gameObject.tag = "Player1";
+            if (isLocalPlayer)
+            {
 
+                gameObject.tag = "Player1";
+            }
             firstPersonController = GetComponent<RigidbodyFirstPersonController>();
             Recordings = new List<ControlsFrame>[3];
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Bullet")
+        if (isServer)
         {
-            Health--;
+            if (collision.transform.tag == "Bullet")
+            {
+                Health--;
+            }
         }
     }
     void Update()
@@ -54,9 +61,16 @@ public class Player : NetworkBehaviour
             {
                 shoot();
             }
+            if (inputProvider.Controls.DropFlag)
+            {
+                if (Flag != null)
+                {
+                    Flag.DropFlag();
+                }
+            }
         }
         if (isLocalPlayer)
-        {
+        {   
             #region Recordings
             if (Input.GetKeyUp(KeyCode.R))
             {
@@ -80,6 +94,7 @@ public class Player : NetworkBehaviour
                 if (recordingIndex > -1)
                 {
                     GameObject recorder = Instantiate(NetworkManager.singleton.playerPrefab);
+                    recorder.tag = "Recorder";
                     Destroy(recorder.GetComponent<NetworkTransformChild>());
                     Destroy(recorder.GetComponent<NetworkTransform>());
                     recorder.GetComponent<Player>().FakeLocalPlayer = true;
@@ -205,5 +220,10 @@ public class Player : NetworkBehaviour
             trans.position = playerTrans.position;
             trans.eulerAngles = playerTrans.eulerAngles;
         }
+    }
+    [Command]
+    void CmdDropFlag()
+    {
+        Flag.DropFlag();
     }
 }

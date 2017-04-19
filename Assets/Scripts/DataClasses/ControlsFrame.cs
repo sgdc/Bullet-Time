@@ -18,7 +18,7 @@ public class ControlsFrame
 
     }
 
-    public ControlsFrame(float horizontal, float vertical,float mouseX,float mouseY, bool shoot, bool jump, bool crouch, bool run)
+    public ControlsFrame(float horizontal, float vertical,float mouseX,float mouseY, bool shoot, bool jump, bool crouch, bool run, bool dropFlag)
     {
         Horizontal = horizontal;
         Vertical = vertical;
@@ -28,5 +28,6 @@ public class ControlsFrame
         Jump = jump;
         Crouch = crouch;
         Run = run;
+        DropFlag = dropFlag;
     }
 }

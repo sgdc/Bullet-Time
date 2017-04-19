@@ -10,12 +10,4 @@ public class FlagPoleDetection : MonoBehaviour {
 	{
 		fc = transform.parent.gameObject.GetComponent<FlagController>();
 	}
-
-	void OnTriggerEnter(Collider other)
-	{
-		if(other.tag.Contains("Player"))
-		{
-			fc.GrabFlag(other.gameObject);
-		}
-	}
 }

@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4472815122223728}
   - component: {fileID: 33493579523834146}
-  - component: {fileID: 65501158714403140}
   - component: {fileID: 23633193707908890}
   m_Layer: 8
   m_Name: Cube
@@ -79,7 +78,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1789369140855230}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -3.1630263, y: 2.4762197, z: 8.895316}
+  m_LocalPosition: {x: -0.2437191, y: -1.626137, z: 5.675423}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4317141348488872}
@@ -242,18 +241,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65501158714403140
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1119548836079644}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &81568374160482418
 AudioListener:
   m_ObjectHideFlags: 1
@@ -315,8 +302,8 @@ MonoBehaviour:
   Cam: {fileID: 4317141348488872}
   Bullet: {fileID: 1360531393755010, guid: 883cb58dae5a7a74db58adc11168491d, type: 2}
   Health: 10
-  Shadow: 0
   FakeLocalPlayer: 0
+  Flag: {fileID: 0}
 --- !u!114 &114339911715367748
 MonoBehaviour:
   m_ObjectHideFlags: 1
