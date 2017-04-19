@@ -20,6 +20,8 @@ public class PlayerRecordingController : MonoBehaviour
     {
         ControlsFrame frame = new ControlsFrame(Input.GetAxis("Horizontal"),
             Input.GetAxis("Vertical"),
+            Input.GetAxis("Mouse X"),
+            Input.GetAxis("Mouse Y"),
             Input.GetButtonDown("Fire1"),
             Input.GetButtonDown("Jump"),
             Input.GetButton("Crouch"),

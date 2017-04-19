@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class Player : NetworkBehaviour
 {
-    public GameObject PlayerPrefab;
     public Transform Cam;
     public GameObject Bullet;
     public int Health = 10;
@@ -34,6 +33,8 @@ public class Player : NetworkBehaviour
         }
         else
         {
+            gameObject.tag = "Player1";
+
             firstPersonController = GetComponent<RigidbodyFirstPersonController>();
             Recordings = new List<ControlsFrame>[3];
         }
@@ -78,7 +79,7 @@ public class Player : NetworkBehaviour
                 }
                 if (recordingIndex > -1)
                 {
-                    GameObject recorder = Instantiate(PlayerPrefab);
+                    GameObject recorder = Instantiate(NetworkManager.singleton.playerPrefab);
                     Destroy(recorder.GetComponent<NetworkTransformChild>());
                     Destroy(recorder.GetComponent<NetworkTransform>());
                     recorder.GetComponent<Player>().FakeLocalPlayer = true;
@@ -119,7 +120,7 @@ public class Player : NetworkBehaviour
                 {
                     if (Recordings[recordingIndex] != null)
                     {
-                        spawnShadow(recordingIndex);
+                        CmdSpawnShadow(recordingIndex);
                     }
                 }
             }
@@ -178,24 +179,31 @@ public class Player : NetworkBehaviour
     {
         GameObject bull = Instantiate<GameObject>(Bullet);
         Rigidbody bullRigid = bull.GetComponent<Rigidbody>();
+        bull.GetComponent<Transform>().position = Cam.position + Cam.forward;
         bullRigid.position = Cam.position + Cam.forward;
         bullRigid.velocity = Cam.forward * 20;
     }
-
-    void spawnShadow(int recordingIndex)
+    [Command]
+    void CmdSpawnShadow(int recordingIndex)
     {
-        GameObject shadow = Instantiate<GameObject>(PlayerPrefab);
-        Player shadowPlayer = shadow.GetComponent<Player>();
-        shadowPlayer.FakeLocalPlayer = true;
-        DestroyImmediate(shadow.GetComponent<LiveInputProvider>());
-        RecordedInputProvider shadowInput = shadow.AddComponent<RecordedInputProvider>();
-        shadowInput.Recording = Recordings[recordingIndex];
+        GameObject shadow = Instantiate<GameObject>(NetworkManager.singleton.spawnPrefabs[0]);
         Transform shadowTransform = shadow.GetComponent<Transform>();
         shadowTransform.position = trans.position;
-        shadowTransform.rotation = trans.rotation;
-        shadowPlayer.Cam.GetComponent<AudioListener>().enabled = false;
-        shadowPlayer.Cam.GetComponent<FlareLayer>().enabled = false; ;
-        shadowPlayer.Cam.GetComponent<Camera>().enabled = false; ;
+        shadowTransform.eulerAngles = trans.eulerAngles;
+        NetworkServer.SpawnWithClientAuthority(shadow, connectionToClient);
+        shadow.GetComponent<Player>().RpcInitShadow(recordingIndex);
     }
-
+    [ClientRpc]
+    void RpcInitShadow(int recordingIndex)
+    {
+        if (hasAuthority)
+        {
+            GameObject playerGO = GameObject.FindGameObjectWithTag("Player1");
+            Player player = playerGO.GetComponent<Player>();
+            GetComponent<RecordedInputProvider>().Recording = player.Recordings[recordingIndex];
+            Transform playerTrans = playerGO.GetComponent<Transform>();
+            trans.position = playerTrans.position;
+            trans.eulerAngles = playerTrans.eulerAngles;
+        }
+    }
 }

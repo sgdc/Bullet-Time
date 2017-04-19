@@ -16,8 +16,10 @@ public class LiveInputProvider : InputProviderBase
 
     void Update()
     {
-        _controls = new ControlsFrame(Input.GetAxis("Horizontal"), 
-            Input.GetAxis("Vertical"), 
+        _controls = new ControlsFrame(Input.GetAxis("Horizontal"),
+            Input.GetAxis("Vertical"),
+            Input.GetAxis("Mouse X"),
+            Input.GetAxis("Mouse Y"),
             Input.GetButtonDown("Fire1"), 
             Input.GetButtonDown("Jump"), 
             Input.GetButton("Crouch"), 

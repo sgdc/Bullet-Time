@@ -10,6 +10,10 @@ public class RecordedInputProvider : InputProviderBase
     {
         get
         {
+            if (Recording == null)
+            {
+                return new ControlsFrame();
+            }
             return Recording[frameIndex];
         }
     }
@@ -21,13 +25,16 @@ public class RecordedInputProvider : InputProviderBase
     {
 
     }
-    
+
     void Update()
     {
-        frameIndex++;
-        if (frameIndex>=Recording.Count)
+        if (Recording != null)
         {
-            frameIndex = Recording.Count - 1;
+            frameIndex++;
+            if (frameIndex >= Recording.Count)
+            {
+                frameIndex = Recording.Count - 1;
+            }
         }
     }
 }

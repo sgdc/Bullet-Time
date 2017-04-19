@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityStandardAssets.Characters.FirstPerson;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -131,7 +130,7 @@ public class RigidbodyFirstPersonController : MonoBehaviour
     {
         RotateView();
 
-        if (Input.GetButtonDown("Jump") && !m_Jump)
+        if (inputProvider.Controls.Jump && !m_Jump)
         {
             m_Jump = true;
         }
@@ -231,7 +230,7 @@ public class RigidbodyFirstPersonController : MonoBehaviour
         // get the rotation before it's changed
         float oldYRotation = transform.eulerAngles.y;
 
-        mouseLook.LookRotation(transform, m_CamTransform);
+        mouseLook.LookRotation(transform, m_CamTransform, inputProvider);
 
         if (m_IsGrounded || advancedSettings.airControl)
         {
