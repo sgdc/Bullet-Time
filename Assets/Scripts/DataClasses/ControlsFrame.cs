@@ -11,6 +11,7 @@ public class ControlsFrame
     public bool Jump { get; set; }
     public bool Crouch { get; set; }
     public bool Run { get; set; }
+    public bool DropFlag { get; set; }
 
     public ControlsFrame()
     {

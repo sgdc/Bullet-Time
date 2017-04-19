@@ -13,7 +13,7 @@ public class FlagPoleDetection : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.tag == "Player")
+		if(other.tag.Contains("Player"))
 		{
 			fc.GrabFlag(other.gameObject);
 		}
