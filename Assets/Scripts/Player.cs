@@ -63,14 +63,11 @@ public class Player : NetworkBehaviour
             }
             if (inputProvider.Controls.DropFlag)
             {
-                if (Flag != null)
-                {
-                    Flag.DropFlag();
-                }
+                CmdDropFlag();
             }
         }
         if (isLocalPlayer)
-        {   
+        {
             #region Recordings
             if (Input.GetKeyUp(KeyCode.R))
             {
@@ -141,6 +138,13 @@ public class Player : NetworkBehaviour
             }
             #endregion
         }
+        if (isServer)
+        {
+            if (Health <= 0)
+            {
+                RpcDie();
+            }
+        }
     }
     //Disables the player so that you can do the recording
     public void Sleep()
@@ -167,7 +171,7 @@ public class Player : NetworkBehaviour
 
     void shoot()
     {
-        if (FakeLocalPlayer)
+        if (FakeLocalPlayer&&!hasAuthority)
         {
             GameObject bull = Instantiate<GameObject>(Bullet);
             Rigidbody bullRigid = bull.GetComponent<Rigidbody>();
@@ -205,7 +209,7 @@ public class Player : NetworkBehaviour
         Transform shadowTransform = shadow.GetComponent<Transform>();
         shadowTransform.position = trans.position;
         shadowTransform.eulerAngles = trans.eulerAngles;
-        NetworkServer.SpawnWithClientAuthority(shadow, connectionToClient);
+        Debug.Log(NetworkServer.SpawnWithClientAuthority(shadow, connectionToClient));
         shadow.GetComponent<Player>().RpcInitShadow(recordingIndex);
     }
     [ClientRpc]
@@ -220,10 +224,26 @@ public class Player : NetworkBehaviour
             trans.position = playerTrans.position;
             trans.eulerAngles = playerTrans.eulerAngles;
         }
+        else
+        {
+            Destroy(GetComponent<RigidbodyFirstPersonController>());
+            Destroy(Cam.GetComponent<AudioListener>());
+            Destroy(Cam.GetComponent<FlareLayer>());
+            Destroy(Cam.GetComponent<Camera>());
+            FakeLocalPlayer = false;
+        }
     }
     [Command]
     void CmdDropFlag()
     {
-        Flag.DropFlag();
+        if (Flag != null)
+        {
+            Flag.DropFlag();
+        }
+    }
+    [ClientRpc]
+    void RpcDie()
+    {
+
     }
 }
