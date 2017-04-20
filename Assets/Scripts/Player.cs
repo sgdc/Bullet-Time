@@ -17,6 +17,7 @@ public class Player : NetworkBehaviour
     Collider collider;
     Rigidbody rigid;
     RigidbodyFirstPersonController firstPersonController;
+    Animator anim;
     bool recordMode;
 
     void Start()
@@ -25,6 +26,7 @@ public class Player : NetworkBehaviour
         inputProvider = GetComponent<InputProviderBase>();
         collider = GetComponent<Collider>();
         rigid = GetComponent<Rigidbody>();
+        anim = trans.FindChild("Model").GetComponent<Animator>();
         if (!isLocalPlayer && !FakeLocalPlayer)
         {
             Destroy(GetComponent<RigidbodyFirstPersonController>());
@@ -145,6 +147,10 @@ public class Player : NetworkBehaviour
                 RpcDie();
             }
         }
+        Vector3 localVelocity = trans.worldToLocalMatrix * rigid.velocity;
+        localVelocity.Normalize();
+        anim.SetFloat("SpeedX", localVelocity.x > 1 ? 1 : localVelocity.x);
+        anim.SetFloat("SpeedY", localVelocity.z > 1 ? 1 : localVelocity.z);
     }
     //Disables the player so that you can do the recording
     public void Sleep()
