@@ -106,7 +106,7 @@ public class Player : NetworkBehaviour
                     }
                     else
                     {
-                        Recordings[recordingIndex].Clear();
+                        Recordings[recordingIndex] = new List<ControlsFrame>(); ;
                     }
                     rec.Recording = Recordings[recordingIndex];
                     Transform recTransform = recorder.GetComponent<Transform>();

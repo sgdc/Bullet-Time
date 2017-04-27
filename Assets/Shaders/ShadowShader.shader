@@ -1,9 +1,8 @@
-﻿Shader "Custom/ShadowShader" {
+﻿Shader "Custom/ShadowShaderNoNormal" {
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
-		_MetallicGlossMap("Metallic", 2D) = "white" {}
-		_BumpMap("Normal Map", 2D) = "bump" {}
+		_MetallicGlossMap("Metallic", 2D) = "black" {}
 	}
 	SubShader {
 		Tags{ "Queue" = "Transparent" "RenderType" = "Transparent" }
@@ -41,8 +40,7 @@
 			fixed4 m = tex2D(_MetallicGlossMap, IN.uv_MainTex);
 			o.Metallic = m.r;
 			o.Smoothness = m.a;
-			o.Alpha = c.a * (0.5 *sin(IN.worldPos.y * 25) + 0.5);
-			o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_MainTex));
+			o.Alpha = c.a * (0.1 *sin(IN.worldPos.y * 25) + 0.6);
 		}
 		ENDCG
 	}
