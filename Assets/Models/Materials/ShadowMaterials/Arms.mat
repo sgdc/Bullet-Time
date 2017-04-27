@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Arms
-  m_Shader: {fileID: 4800000, guid: 6b71f215dbce37f4a951522659be1207, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8ff36f7a17c69c249b1fdeec0529a534, type: 3}
   m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -38,7 +38,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8c675fe505f35f346bed670a87c964d8, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -57,7 +57,10 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DisintegrationThickness: 0.1
     - _DstBlend: 0
+    - _Expansion: 0
+    - _FinishRadius: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -71,5 +74,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    - _Color: {r: 0.3294117, g: 1, b: 0.16176468, a: 1}
+    - _DisintegrationColor: {r: 0.3294117, g: 1, b: 0.16176468, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

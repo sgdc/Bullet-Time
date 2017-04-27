@@ -701,6 +701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4196977606283622}
   - component: {fileID: 137613834357694964}
+  - component: {fileID: 114115403409941130}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -999,7 +1000,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1976925970028924}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 460.5848, y: 178.2552, z: -897.8911}
+  m_LocalPosition: {x: 445.31363, y: 176.1279, z: -895.7204}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4266562289934106}
@@ -1401,7 +1402,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1665906752186800}
-  m_LocalRotation: {x: 0.58068424, y: -0.007300099, z: -0.50262356, w: 0.64040786}
+  m_LocalRotation: {x: 0.58068424, y: -0.0073000984, z: -0.50262356, w: 0.64040786}
   m_LocalPosition: {x: 0.00030140765, y: 0.009929586, z: -0.0030105961}
   m_LocalScale: {x: 0.99999994, y: 1, z: 1.0000001}
   m_Children:
@@ -1458,7 +1459,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1856775265910074}
-  m_LocalRotation: {x: -0.71797144, y: 0.19330387, z: -0.16963813, w: 0.6468181}
+  m_LocalRotation: {x: -0.71797144, y: 0.19330385, z: -0.16963813, w: 0.6468181}
   m_LocalPosition: {x: -0.20798571, y: 0.035829075, z: -0.06897233}
   m_LocalScale: {x: 1.0000001, y: 1, z: 1}
   m_Children:
@@ -1678,6 +1679,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114115403409941130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1875098963773178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c810ce821aa73564aa9af19e3f13aaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114551057099810406
 MonoBehaviour:
   m_ObjectHideFlags: 1

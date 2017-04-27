@@ -18,7 +18,9 @@ public class Player : NetworkBehaviour
     Rigidbody rigid;
     RigidbodyFirstPersonController firstPersonController;
     Animator anim;
+    SphericalDisintegration disintegrator;
     bool recordMode;
+    bool dieing = false;
 
     void Start()
     {
@@ -26,7 +28,9 @@ public class Player : NetworkBehaviour
         inputProvider = GetComponent<InputProviderBase>();
         collider = GetComponent<Collider>();
         rigid = GetComponent<Rigidbody>();
-        anim = trans.FindChild("Model").GetComponent<Animator>();
+        Transform model = trans.FindChild("Model");
+        anim = model.GetComponent<Animator>();
+        disintegrator = model.GetComponentInChildren<SphericalDisintegration>();
         if (!isLocalPlayer && !FakeLocalPlayer)
         {
             Destroy(GetComponent<RigidbodyFirstPersonController>());
@@ -142,8 +146,9 @@ public class Player : NetworkBehaviour
         }
         if (isServer)
         {
-            if (Health <= 0)
+            if (Health <= 0 && !dieing)
             {
+                dieing = true;
                 RpcDie();
             }
         }
@@ -177,7 +182,7 @@ public class Player : NetworkBehaviour
 
     void shoot()
     {
-        if (FakeLocalPlayer&&!hasAuthority)
+        if (FakeLocalPlayer && !hasAuthority)
         {
             GameObject bull = Instantiate<GameObject>(Bullet);
             Rigidbody bullRigid = bull.GetComponent<Rigidbody>();
@@ -250,6 +255,6 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     void RpcDie()
     {
-
+        disintegrator.Expand(2);
     }
 }
