@@ -60,7 +60,7 @@ Material:
     - _DisintegrationThickness: 0.1
     - _DstBlend: 0
     - _Expansion: 0
-    - _FinishRadius: 1
+    - _FinishRadius: 1.2
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

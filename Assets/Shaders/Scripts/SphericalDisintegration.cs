@@ -14,15 +14,17 @@ public class SphericalDisintegration : MonoBehaviour
     {
         trans = GetComponent<Transform>();
         mats = GetComponent<Renderer>().materials;
+        localPoints = new Vector4[5];
+        points = new Vector4[5];
         foreach (Material mat in mats)
         {
             mat.SetInt("_OrbsLength", 5);
+            mat.SetVectorArray("_Orbs", points);
         }
-        localPoints = new Vector4[5];
-        points = new Vector4[5];
+        System.Random rand = new System.Random();
         for (int i = 0; i < 5; i++)
         {
-            localPoints[i] = new Vector4(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+            localPoints[i] = new Vector4((float)rand.NextDouble() - 0.5f, (float)rand.NextDouble() - 0.5f, (float)rand.NextDouble() - 0.5f, 0);
         }
     }
     
@@ -49,7 +51,7 @@ public class SphericalDisintegration : MonoBehaviour
     }
     private void updateShaders()
     {
-        Vector4 localPos = trans.position;
+        Vector4 localPos = trans.position+Vector3.up*0.8f;
         for (int i = 0; i < 5; i++)
         {
             points[i] = localPos + localPoints[i];
