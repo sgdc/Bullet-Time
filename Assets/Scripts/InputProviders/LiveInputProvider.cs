@@ -24,6 +24,7 @@ public class LiveInputProvider : InputProviderBase
             Input.GetButtonDown("Jump"), 
             Input.GetButton("Crouch"), 
             Input.GetButton("Run"),
-            Input.GetKeyDown(KeyCode.P));
+            Input.GetKeyDown(KeyCode.P),
+            0);
     }
 }

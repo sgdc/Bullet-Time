@@ -8,6 +8,7 @@ public class PlayerRecordingController : MonoBehaviour
     public List<ControlsFrame> Recording;
     public Player PlayerScript;
 
+    private float recordTime = 0;
 
     // Use this for initialization
     void Start()
@@ -18,6 +19,7 @@ public class PlayerRecordingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        recordTime += Time.deltaTime;
         ControlsFrame frame = new ControlsFrame(Input.GetAxis("Horizontal"),
             Input.GetAxis("Vertical"),
             Input.GetAxis("Mouse X"),
@@ -26,7 +28,8 @@ public class PlayerRecordingController : MonoBehaviour
             Input.GetButtonDown("Jump"),
             Input.GetButton("Crouch"),
             Input.GetButton("Run"),
-            Input.GetKeyDown(KeyCode.P));
+            Input.GetKeyDown(KeyCode.P),
+            recordTime);
         Recording.Add(frame);
 
         if (Input.GetKeyUp(KeyCode.R))

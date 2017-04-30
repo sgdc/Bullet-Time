@@ -6,34 +6,52 @@ using UnityEngine;
 public class RecordedInputProvider : InputProviderBase
 {
     public List<ControlsFrame> Recording;
+    private ControlsFrame _controls;
     public override ControlsFrame Controls
     {
         get
         {
-            if (Recording == null)
-            {
-                return new ControlsFrame();
-            }
-            return Recording[frameIndex];
+            return _controls;
         }
     }
 
     int frameIndex = 0;
+    int lastFrameIndex = 0;
+    float playTime = 0;
 
 
     void Start()
     {
-
+        _controls = new ControlsFrame();
     }
 
     void Update()
     {
         if (Recording != null)
         {
-            frameIndex++;
-            if (frameIndex >= Recording.Count)
+            if (frameIndex < Recording.Count)
             {
-                frameIndex = Recording.Count - 1;
+                lastFrameIndex = frameIndex;
+                List<ControlsFrame> passedFrames = new List<ControlsFrame>();
+                playTime += Time.deltaTime;
+                while (frameIndex != Recording.Count && playTime > Recording[frameIndex].TimeStamp)
+                {
+                    passedFrames.Add(Recording[frameIndex]);
+                    frameIndex++;
+                }
+                if (lastFrameIndex == frameIndex)
+                {
+                    _controls.Shoot = false;
+                }
+                else
+                {
+                    _controls = ControlsFrame.CollapseFrames(passedFrames);
+                }
+            }
+            else
+            {
+                Recording = null;
+                _controls = new ControlsFrame();
             }
         }
     }
