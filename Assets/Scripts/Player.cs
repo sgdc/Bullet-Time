@@ -188,6 +188,7 @@ public class Player : NetworkBehaviour
             Rigidbody bullRigid = bull.GetComponent<Rigidbody>();
             bullRigid.position = Cam.position + Cam.forward;
             bullRigid.velocity = Cam.forward * 20;
+            bull.tag = "Untagged";
             return;
         }
         if (isServer)
@@ -255,6 +256,30 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     void RpcDie()
     {
-        disintegrator.Expand(2);
+        StartCoroutine(DisapearAndDestroy());
+    }
+    [ClientRpc]
+    public void RpcDisapear()
+    {
+        StartCoroutine(DisapearAndDestroy());
+    }
+    private IEnumerator DisapearAndDestroy()
+    {
+        yield return StartCoroutine(disintegrator.ExpandCoroutine(2));
+        if (Flag != null)
+        {
+            Flag.DropFlag();
+        }
+        Destroy(gameObject);
+    }
+
+    public void PlaybackFinished()
+    {
+        CmdPlaybackFinished();
+    }
+    [Command]
+    void CmdPlaybackFinished()
+    {
+        RpcDisapear();
     }
 }

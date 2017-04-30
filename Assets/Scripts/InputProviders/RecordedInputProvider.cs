@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class RecordedInputProvider : InputProviderBase
 {
@@ -19,7 +20,7 @@ public class RecordedInputProvider : InputProviderBase
     }
 
     int frameIndex = 0;
-
+    bool playing=true;
 
     void Start()
     {
@@ -34,7 +35,16 @@ public class RecordedInputProvider : InputProviderBase
             if (frameIndex >= Recording.Count)
             {
                 frameIndex = Recording.Count - 1;
+                if (playing)
+                {
+                    playing = false;
+                    FinishedPlayBack();
+                }
             }
         }
+    }
+    void FinishedPlayBack()
+    {
+        GetComponent<Player>().PlaybackFinished();
     }
 }
