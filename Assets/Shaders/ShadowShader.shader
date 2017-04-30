@@ -30,8 +30,6 @@
 			float3 viewDir;
 		};
 
-		half _Glossiness;
-		half _Metallic;
 		fixed4 _Color;
 		fixed4 _DisintegrationColor;
 		float _FinishRadius;
