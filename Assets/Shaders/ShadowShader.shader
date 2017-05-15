@@ -74,7 +74,7 @@
 			fixed4 m = tex2D(_MetallicGlossMap, IN.uv_MainTex);
 			o.Metallic = m.r;
 			o.Smoothness = m.a;
-			o.Alpha = c.a * (0.1 *sin(IN.worldPos.y * 25) + 0.6);
+			o.Alpha = c.a * (0.1 *sin(IN.worldPos.y * 300) + 0.6);
 		}
 
 		half4 LightingCustom(SurfaceOutputStandard s, half3 lightDir, UnityGI gi)

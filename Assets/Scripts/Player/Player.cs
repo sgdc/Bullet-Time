@@ -19,6 +19,7 @@ public class Player : NetworkBehaviour
     RigidbodyFirstPersonController firstPersonController;
     Animator anim;
     SphericalDisintegration disintegrator;
+    GameObject playerModel;
     bool recordMode;
     bool dieing = false;
 
@@ -47,6 +48,11 @@ public class Player : NetworkBehaviour
             }
             firstPersonController = GetComponent<RigidbodyFirstPersonController>();
             Recordings = new List<ControlsFrame>[3];
+        }
+        playerModel = model.gameObject;
+        if (isLocalPlayer)
+        {
+            playerModel.SetActive(false);
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -116,6 +122,7 @@ public class Player : NetworkBehaviour
                     Transform recTransform = recorder.GetComponent<Transform>();
                     recTransform.position = trans.position;
                     recTransform.rotation = trans.rotation;
+                    recTransform.FindChild("Model").gameObject.SetActive(false);
                     Sleep();
                 }
             }
@@ -154,12 +161,17 @@ public class Player : NetworkBehaviour
         }
         Vector3 localVelocity = trans.worldToLocalMatrix * rigid.velocity;
         localVelocity.Normalize();
-        anim.SetFloat("SpeedX", localVelocity.x > 1 ? 1 : localVelocity.x);
-        anim.SetFloat("SpeedY", localVelocity.z > 1 ? 1 : localVelocity.z);
+        if (anim!=null)
+        {
+            anim.SetFloat("SpeedX", localVelocity.x > 1 ? 1 : localVelocity.x);
+            anim.SetFloat("SpeedY", localVelocity.z > 1 ? 1 : localVelocity.z);
+        }
     }
+    
     //Disables the player so that you can do the recording
     public void Sleep()
     {
+        playerModel.SetActive(true);
         this.enabled = false;
         firstPersonController.enabled = false;
         collider.enabled = false;
@@ -167,9 +179,11 @@ public class Player : NetworkBehaviour
         Cam.GetComponent<Camera>().enabled = false;
         Cam.GetComponent<FlareLayer>().enabled = false;
         Cam.GetComponent<AudioListener>().enabled = false;
+        
     }
     public void WakeUp()
     {
+        playerModel.SetActive(false);
         this.enabled = true;
         firstPersonController.enabled = true;
         collider.enabled = true;
